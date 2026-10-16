@@ -1,0 +1,83 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: testubg
+  description: Quarkus golden-path backend with Jenkins, Helm, and OpenAPI
+  tags:
+    - quarkus
+    - java
+    - golden-path
+    - jenkins
+    - helm
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/source-location: url:https://github.com/rmallam/testubg/tree/main/
+    backstage.io/view-url: https://github.com/rmallam/testubg
+    backstage.io/edit-url: https://github.com/rmallam/testubg/edit/main/catalog-info.yaml
+    github.com/project-slug: rmallam/testubg
+    jenkins.io/job-full-name: demo/testubg
+    sonarqube.org/project-key: testubg
+    argocd/app-name: testubg
+    argocd/app-namespace: openshift-gitops
+    backstage.io/kubernetes-id: testubg
+    backstage.io/kubernetes-namespace: demo-dev
+    kiali.io/namespace: demo-dev
+    vault.io/secrets-path: rhdh
+    jira/project-key: SCRUM
+    snyk.io/org-id: stub-org
+    snyk.io/org-name: stub-org
+    snyk.io/project-ids: stub
+    servicenow.com/entity-id: demo
+    jfrog-artifactory/image-name: testubg
+    dynatrace.com/dynatrace-entity-id: SERVICE-39720C1E0047A5C0
+    acme.io/devfile-path: devfile.yaml
+    acme.io/helm-chart: chart
+    acme.io/mesh: ambient
+    acme.io/mesh-ingress: gateway
+    acme.io/devspaces-url: https://devspaces.apps.rosa.rosa-rwx5g.f8y9.p3.openshiftapps.com
+    acme.io/devspaces-factory-url: https://devspaces.apps.rosa.rosa-rwx5g.f8y9.p3.openshiftapps.com#https://github.com/rmallam/testubg?new&devfilePath=devfile.yaml
+  links:
+    - url: https://github.com/rmallam/testubg/tree/main/chart
+      title: Helm chart
+      icon: github
+    - url: https://github.com/rmallam/testubg/blob/main/Jenkinsfile
+      title: Jenkinsfile
+      icon: github
+    - url: https://jenkins-jenkins.apps.rosa.rosa-rwx5g.f8y9.p3.openshiftapps.com/job/demo/job/testubg/
+      title: Jenkins CI
+      icon: dashboard
+    - url: https://github.com/rmallam/testubg/blob/main/openapi.yaml
+      title: OpenAPI
+      icon: github
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:default/guest
+  system: acme-demo
+  providesApis:
+    - testubg-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: testubg-api
+  description: OpenAPI for testubg
+  tags:
+    - quarkus
+    - openapi
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: user:default/guest
+  system: acme-demo
+  definition:
+    $text: ./openapi.yaml
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: acme-demo
+  description: Demo product (website + backend)
+spec:
+  owner: user:default/guest
